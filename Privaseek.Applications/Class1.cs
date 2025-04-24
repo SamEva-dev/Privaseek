@@ -1,4 +1,4 @@
-﻿namespace Privaseek.Application
+﻿namespace Privaseek.Applications
 {
     // All the code in this file is included in all platforms.
     public class Class1

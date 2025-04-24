@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Privaseek.UI.ViewModels"
+             xmlns:domain="clr-namespace:Privaseek.Domain.ValueObjects;assembly=Privaseek.Domain"
+            x:DataType="viewModels:SearchViewModel"
+             x:Class="Privaseek.UI.Views.HomePage"
+             Title="Privaseek">
+
+    <!--<ContentPage.BindingContext>
+        <viewModels:SearchViewModel />
+    </ContentPage.BindingContext>-->
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+        <!-- Barre de recherche avec commande -->
+        <SearchBar
+            Text="{Binding Query}"
+            Placeholder="Rechercher…"
+            SearchCommand="{Binding SearchCommand}"
+            SearchCommandParameter="{Binding Query}" />
+
+        <!-- Indicateur de chargement -->
+        <ActivityIndicator
+            IsVisible="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            HeightRequest="32" />
+
+        <!-- Résultats sous forme de cartes -->
+        <CollectionView ItemsSource="{Binding Results}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="domain:ResultItem">
+                    <Frame
+                        Padding="12"
+                        CornerRadius="12"
+                        Margin="0,4"
+                        HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image
+                                Source="{Binding Icon}"
+                                WidthRequest="32"
+                                HeightRequest="32" />
+
+                            <VerticalStackLayout Margin="8,0">
+                                <Label
+                                    Text="{Binding Title}"
+                                    FontAttributes="Bold" />
+                                <Label
+                                    Text="{Binding Subtitle}"
+                                    FontSize="12" />
+                            </VerticalStackLayout>
+
+                            <Label
+                                Text="{Binding Score, StringFormat='{}{0:P0}'}"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
