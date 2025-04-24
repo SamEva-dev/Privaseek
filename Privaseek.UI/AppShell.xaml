@@ -9,8 +9,13 @@
     Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Home"
+        Title="Search"
         ContentTemplate="{DataTemplate views:HomePage}"
         Route="HomePage" />
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Route="SettingsPage" />
 
 </Shell>

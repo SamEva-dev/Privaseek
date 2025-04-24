@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Privaseek.UI", "Privaseek.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Privaseek.Applications", "Privaseek.Applications\Privaseek.Applications.csproj", "{FC940774-52E1-44E7-83C9-89DF2E39EF6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Privaseek.Tests", "Privaseek.Tests\Privaseek.Tests.csproj", "{B5B00919-830C-4CE5-81C8-36EAC8FF7C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{FC940774-52E1-44E7-83C9-89DF2E39EF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC940774-52E1-44E7-83C9-89DF2E39EF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC940774-52E1-44E7-83C9-89DF2E39EF6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B00919-830C-4CE5-81C8-36EAC8FF7C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B00919-830C-4CE5-81C8-36EAC8FF7C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B00919-830C-4CE5-81C8-36EAC8FF7C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B00919-830C-4CE5-81C8-36EAC8FF7C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

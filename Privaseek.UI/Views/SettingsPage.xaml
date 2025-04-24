@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Privaseek.UI.ViewModels"
+             x:Class="Privaseek.UI.Views.SettingsPage"
+             x:DataType="viewModels:SearchViewModel"
+             Title="SettingsPage">
+
+    <ScrollView Padding="16">
+        <VerticalStackLayout Spacing="24">
+
+            <!-- Section Confidentialité, etc. -->
+            <Frame CornerRadius="12" Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Indexation" FontAttributes="Bold" FontSize="18"/>
+                    <Label Text="Parcourez et indexez à nouveau tous vos fichiers locaux." FontSize="14"/>
+
+                    <Button
+                        Text="Réindexer"
+                        Command="{Binding ReindexCommand}"
+                        IsEnabled="{Binding IsReindexing, Converter={StaticResource InverseBoolConverter}}"/>
+
+                    <ActivityIndicator
+                        IsVisible="{Binding IsReindexing}"
+                        IsRunning="{Binding IsReindexing}"
+                        HeightRequest="32"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- D’autres réglages ici... -->
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
