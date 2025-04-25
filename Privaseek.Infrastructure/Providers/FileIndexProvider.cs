@@ -1,5 +1,6 @@
 ﻿using Privaseek.Applications.Contracts;
 using Privaseek.Domain.Entities;
+using Privaseek.Domain.Enums;
 using Privaseek.Domain.ValueObjects;
 using SQLite;
 
@@ -43,8 +44,24 @@ public class FileIndexProvider : IFileIndexer
                 f.Path,
                 GetIconFromExtension(f.Extension),
                 1.0,
-                f.Path))
+                f.Path,
+                Timestamp: f.CreatedAt,
+                Type: ResultType.File))
             .ToList();
+
+        /*
+         return _indexer.SearchAsync(query, ct)
+                   .ContinueWith(t => t.Result
+                       .Select(f => new ResultItem(
+                           f.Title,
+                           f.Path,
+                           GetIconFromExtension(f.Extension),
+                           Score: 1.0,
+                           Path: f.Path,
+                           Timestamp: f.CreatedAt,           // <—
+                           Type: ResultType.File))
+                       .ToList() as IReadOnlyList<ResultItem>);
+         */
     }
 
     private string GetIconFromExtension(string ext)

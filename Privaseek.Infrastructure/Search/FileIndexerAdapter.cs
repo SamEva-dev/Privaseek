@@ -3,7 +3,7 @@ using Privaseek.Domain.ValueObjects;
 
 namespace Privaseek.Infrastructure.Search;
 
-public class FileIndexerAdapter : ISearchService
+public class FileIndexerAdapter : IIndexedSearchService
 {
     private readonly IFileIndexer _indexer;
 

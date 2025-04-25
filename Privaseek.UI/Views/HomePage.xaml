@@ -11,49 +11,109 @@
     <!--<ContentPage.BindingContext>
         <viewModels:SearchViewModel />
     </ContentPage.BindingContext>-->
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
 
-    <VerticalStackLayout Padding="16" Spacing="12">
-        <!--  Barre de recherche avec commande  -->
-        <SearchBar
+            <!-- Filtres -->
+            <HorizontalStackLayout Spacing="12">
+                <CheckBox IsChecked="{Binding ShowFiles}" />
+                <Label Text="Fichiers" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding ShowMessages}" />
+                <Label Text="Messages" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding ShowApps}" />
+                <Label Text="Apps" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="12">
+                <CheckBox IsChecked="{Binding ShowWeb}" />
+                <Label Text="Web" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding ShowImages}" />
+                <Label Text="Images" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding ShowVideos}" />
+                <Label Text="Vidéos" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="12">
+                <Label Text="De" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding StartDate, Mode=TwoWay}" />
+                <Label Text="À" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding EndDate, Mode=TwoWay}" />
+            </HorizontalStackLayout>
+
+            <!-- 3. Option groupement -->
+            <HorizontalStackLayout Spacing="12">
+                <Switch IsToggled="{Binding GroupByDate}" />
+                <Label Text="Grouper par date" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+
+            <!--  Barre de recherche avec commande  -->
+            <SearchBar
             Placeholder="Rechercher…"
             SearchCommand="{Binding SearchCommand}"
             SearchCommandParameter="{Binding Query}"
             Text="{Binding Query}" />
 
-        <!--  Indicateur de chargement  -->
-        <ActivityIndicator
+            <!--  Indicateur de chargement  -->
+            <ActivityIndicator
             HeightRequest="32"
             IsRunning="{Binding IsLoading}"
             IsVisible="{Binding IsLoading}" />
 
-        <!--  Résultats sous forme de cartes  -->
-        <CollectionView ItemsSource="{Binding Results}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="domain:ResultItem">
-                    <Frame
-                        Margin="0,4"
-                        Padding="12"
-                        CornerRadius="12"
-                        HasShadow="True">
-                        <HorizontalStackLayout>
-                            <Image
-                                HeightRequest="32"
-                                Source="{Binding Icon}"
-                                WidthRequest="32" />
+            <!--  Résultats sous forme de cartes  -->
+            <!-- 5a. Résultats plats -->
+            <CollectionView
+        ItemsSource="{Binding Results}"
+        IsVisible="{Binding GroupByDate, Converter={StaticResource InverseBoolConverter}}">
 
-                            <VerticalStackLayout Margin="8,0">
-                                <Label FontAttributes="Bold" Text="{Binding Title}" />
-                                <Label FontSize="12" Text="{Binding Subtitle}" />
-                            </VerticalStackLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="domain:ResultItem">
+                        <Frame Padding="12" CornerRadius="12" Margin="0,4" HasShadow="True">
+                            <HorizontalStackLayout>
+                                <Image Source="{Binding Icon}" WidthRequest="32" HeightRequest="32" />
+                                <VerticalStackLayout Margin="8,0">
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Subtitle}" FontSize="12" />
+                                    <Label Text="{Binding Timestamp, StringFormat='{}{0:dd/MM/yyyy}'}" FontSize="10" TextColor="Gray"/>
+                                </VerticalStackLayout>
+                                <Label Text="{Binding Score, StringFormat='{}{0:P0}'}"
+                       HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                            <Label
-                                HorizontalOptions="EndAndExpand"
-                                Text="{Binding Score, StringFormat='{}{0:P0}'}"
-                                VerticalOptions="Center" />
-                        </HorizontalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+            <!-- 5b. Résultats groupés -->
+            <CollectionView
+        ItemsSource="{Binding GroupedResults}"
+        IsGrouped="True"
+        IsVisible="{Binding GroupByDate}">
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#EEE" Padding="8">
+                            <Label Text="{Binding Key}" FontAttributes="Bold" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="domain:ResultItem">
+                        <Frame Padding="12" CornerRadius="12" Margin="0,4" HasShadow="True">
+                            <HorizontalStackLayout>
+                                <Image Source="{Binding Icon}" WidthRequest="32" HeightRequest="32" />
+                                <VerticalStackLayout Margin="8,0">
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Subtitle}" FontSize="12" />
+                                </VerticalStackLayout>
+                                <Label Text="{Binding Timestamp, StringFormat='{}{0:dd/MM/yyyy}'}"
+                       VerticalOptions="Center" FontSize="10" TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

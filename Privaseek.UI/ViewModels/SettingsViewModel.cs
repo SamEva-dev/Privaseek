@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Privaseek.Applications.Contracts;
 using Privaseek.Infrastructure.Providers;
